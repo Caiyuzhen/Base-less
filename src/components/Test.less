@@ -1,23 +1,47 @@
-@main-color: #25019e;
-
-* {
-	margin: 0;
-}
-  
-#wrap{
+/*
+	基础知识
+		注释: 
+			less 中只有  划线**划线  的文件会被编译到注释中去，而双划线不会
+		变量: 
+			可以用 @ 声明【属性值】、【属性名】、【选择器】、【URL】
+			注意less的变量都是块级作用域
+		嵌套: 
+			要做 hover 效果时，得用 & 从父级来选子元素，因为 hover 要跟元素平级！
+		混合: 
+			用点 . 来定义
+				混合的类型有
+					普通(缺点是会编译到原生 css 中去，增加包体积）
+					输出混合(不会编译到原生 css 中去，不会增加包体积）
+					带【参数】的混合, 在 () 内可以【 @ 定义变量的行参】, 然后再在【实际运用中】去【实例化这个参数的值】
+					带【参数】且有【默认值】
+					【引用命名】来传递实参数(场景为其他的都用默认值，就这一个单独传参）
+					带条件的混合
+*/
+// 👇定义公共变量
+@main-color: #9e016f;
+@hover-color-top: #382ad1;
+@hover-color-down: #01b777;
+@bg-color-one:  #daccff;
+@bg-color-two:  #d3ffcc;
+@m :margin; //注意！对于【属性名】、【选择器】变量的引用需要加上 {}
+@selector-wrap-one: #wrap-one; //注意！对于【属性名】、【选择器】变量的引用需要加上 {}
+@selector-wrap-two: #wrap-two; //注意！对于【属性名】、【选择器】变量的引用需要加上 {}
+// 👇混合, 相当于公共的样式！！
+.wrapFn(@Special-color, @w, @h:280px){ //👈相当于对应的实例要特化【颜色】跟【宽度】, 也可以带有默认值
 	margin: auto;
 	position: relative;
-	width: 400px;
-	height: 400px;
-	border-radius: 0.75rem;
-	background-color: #b8a1f7;
+	width: @w;
+	height: @h;
+	border-radius: 1.25rem;
+	background-color:@Special-color;
 	left:50%;
 	top:50%;
 	margin-left:-200px;
 	margin-top:200px;
-
-	.inner{
-		margin: auto;
+	display: flex;
+}
+.centerFn(){ //👈混合方法, 带 () 就不会输出到原生 css 中去，不带 () 就会
+	margin: auto;
 		position: absolute;
 		font-weight: 600;
 		font-size: 32px;
@@ -25,11 +49,59 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		color: @main-color;
-		width: 50px;
-		height: 50px;
-	}	
+		width: 120px;
+		height: 120px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.75rem;
+		background-color: @main-color;
+		transition: all 0.2s ease-in-out;
 }
+
+
+
+
+* {
+	@{m}: 0;  //等价于 margin: 0;
+}
+  
+
+@{selector-wrap-one}{ //等价于 #wrap
+	.wrapFn( #daccff, 300px, 400px );//👈带参数的混合方法的调用! 然后传入【实例化的值】！
+
+	.inner{
+		.centerFn(); //👈混合方法的调用！！
+
+		.inner-text{
+			font-weight: 600;
+			font-size: 32px;
+		}	
+		&:hover{//& 表示从父级向下选择一级, //⚡️ & 因为 hover 跟 inner-text 是平级关系，所以要用 & 来选择！
+			background-color: @hover-color-top;
+		}
+		
+	}
+}
+
+@{selector-wrap-two}{
+	.wrapFn( #d3ffcc, 200px, @h:600px ); //👈带参数的混合方法的调用! 然后传入【实例化的值】！🔥🔥然后 @h 为命名参数，单独拿出这个来传参数，可以脱离排序
+
+	.inner2{
+		.centerFn(); //👈混合方法的调用！！
+
+		.inner-text{
+			font-weight: 600;
+			font-size: 32px;
+		}
+		&:hover{//& 表示从父级向下选择一级, //⚡️ & 因为 hover 跟 inner-text 是平级关系，所以要用 & 来选择！
+			background-color: @hover-color-down;
+		}
+	}
+
+}
+
+
 
 
 //相对于父元素居中
