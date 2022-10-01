@@ -20,6 +20,10 @@ const Test:FC = ():ReactElement => {
 			</div>
 		</div>
 
+		<div className="triangle">
+			<div className="triangle-border"></div>
+		</div>
+
 		
 	</>
   )

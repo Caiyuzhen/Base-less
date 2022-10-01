@@ -1,0 +1,52 @@
+// 🔥🔥🔥 匹配模式，比如定义三角形的不同方向 根据 U R W L 来定义不同的 border-color，也就是不同的方向！！
+.triangleStyled(U, @trianBorder, @trianColor){
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 0px; 
+	height:0px; 
+	border-width: @trianBorder;
+	border-style: solid;
+	border-color: transparent transparent @trianColor transparent; //下 左 上 右
+}
+
+.triangleStyled(R, @trianBorder, @trianColor){
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 0px; 
+	height:0px; 
+	border-width: @trianBorder;
+	border-style: solid;
+	border-color: transparent transparent transparent @trianColor; //下 左 上 右
+}
+
+.triangleStyled(D, @trianBorder, @trianColor){
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 0px; 
+	height:0px; 
+	border-width: @trianBorder;
+	border-style: solid;
+	border-color: @trianColor transparent transparent transparent; //下 左 上 右
+}
+
+.triangleStyled(L, @trianBorder, @trianColor){
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 0px; 
+	height:0px; 
+	border-width: @trianBorder;
+	border-style: solid;
+	border-color: transparent @trianColor transparent transparent; //下 左 上 右
+}
