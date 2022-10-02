@@ -203,12 +203,12 @@
 // 	background-color: @light;
 // }
 
-.main-background{
-	height: 1000px;
-	width: 1000px;
+
+//⚡️⚡️React 也可以结合混合的写法！！
+@b:#1e1e1e;
+.black(@b){
+	background-color: @b;
 }
-
-
 
 .changeBox_light{
 	height: 300px;
@@ -220,7 +220,8 @@
 .changeBox_dark{
 	height: 300px;
 	width: 300px;
-	background-color: @dark;
+	// background-color: @dark;
+	.black(@b);
 	color: white;
 }
 
