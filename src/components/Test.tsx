@@ -6,14 +6,14 @@ import './Test.less'
 
 const Test:FC = ():ReactElement => {
 
-	// 定义深色跟浅色模式
+	//定义深色跟浅色模式
 	const themeColor = {
 		dark: '#000000',
 		light: '#FFFFFF'
 	}
 
 
-	//状态开关控制颜色
+	//【记录状态】用来控制开关控制颜色
 	const [openDark, setOpenDark] = useState<boolean>(false)
 
 	
@@ -33,14 +33,14 @@ const Test:FC = ():ReactElement => {
 		setOpenDark(!openDark)
 
 		if(openDark){
-			localStorage.setItem("light", themeColor.light)//开关关闭了，所以把浅色模式保存到本地，先做这步
-			localStorage.setItem("openDark", JSON.stringify(false))//设置本地的 openDark 状态
+			localStorage.setItem("light", themeColor.light)//【记录色值】开关关闭了，所以把浅色模式保存到本地，先做这步
+			localStorage.setItem("openDark", JSON.stringify(false))//【记录状态】设置本地的 openDark 状态
 			document.body.style.backgroundColor = (localStorage.getItem("light")) as string//然后设置整个网页为浅色背景
 			localStorage.removeItem("dark");//然后清除本地的深色模式
 
 		}else{
-			localStorage.setItem("dark", themeColor.dark)//开关打开了，所以把深色模式保存到本地，先做这步
-			localStorage.setItem("openDark", JSON.stringify(true))//设置本地的 openDark 状态
+			localStorage.setItem("dark", themeColor.dark)//【记录色值】开关打开了，所以把深色模式保存到本地，先做这步
+			localStorage.setItem("openDark", JSON.stringify(true))//【记录状态】设置本地的 openDark 状态
 			document.body.style.backgroundColor = (localStorage.getItem("dark")) as string//然后设置网页为深色背景			
 			localStorage.removeItem("light");//然后清除本地的浅色模式
 
